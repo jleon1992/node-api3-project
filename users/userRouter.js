@@ -104,20 +104,26 @@ function validateUserId(req, res, next) {
 
 function validateUser(req, res, next) {
   // do your magic!
-  if(req.body){
+
+const empty = {}
+  if(Object.keys(req.body).length > 0){
+    console.log('body', Object.keys(req.body).length)
     if(req.body.name){
       next()
     }else{
-      res.status(400).json({ message: 'missing required name field' })
+
+      res.status(400).json({ message: 'missing required name field', body: req.body })
     }
   } else {
+  
+
     res.status(400).json({ message: 'missing user data' })
   }
 }
 
 function validatePost(req, res, next) {
   // do your magic!
-  if(req.body){
+  if(Object.keys(req.body).length > 0){
     if(req.body.text){
       next()
     } else {
